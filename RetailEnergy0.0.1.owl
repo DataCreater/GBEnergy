@@ -1,0 +1,786 @@
+@prefix : <https://www.lidcast.co.uk/ontologies/RE#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://www.lidcast.co.uk/ontologies/RE> .
+
+<https://www.lidcast.co.uk/ontologies/RE> rdf:type owl:Ontology ;
+                                           owl:versionIRI <https://www.lidcast.co.uk/ontologies/RE0.0.1> ;
+                                           owl:imports <https://ontologies.semanticarts.com/o/gistCore9.7.0> ;
+                                           rdfs:comment """This digital artifact is built upon Gist. Gist is a minimalist upper ontology created by Semantic Arts.
+
+No changes have been made to Gist. Gist classes are specialised as new subclasses applicable to the target domain.
+
+The purpose of the ontology is to explain how the major elements of the Retail Energy Market relate. As far as possible terminology is consistent with industry codes and regulation at the time of its creation."""^^xsd:string ;
+                                           <http://www.w3.org/2004/02/skos/core#definition> "An ontology of the Retail Energy Market of Great Britain created by Lidcast Data Limited."^^xsd:string ;
+                                           <https://ontologies.semanticarts.com/gist/license> "https://creativecommons.org/licenses/by-sa/3.0/"^^xsd:string .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://ontologies.semanticarts.com/gist/Equipment
+<https://ontologies.semanticarts.com/gist/Equipment> rdf:type owl:Class .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Advanced_Meter
+:Advanced_Meter rdf:type owl:Class ;
+                rdfs:subClassOf :Retail_Energy_Meter ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                                  owl:someValuesFrom :Advanced_Metering_Equipment_Type
+                                ] ;
+                rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Advanced meters are devices which provide measured gas or electricity consumption for multiple time periods (ie for each half hour in electricity or hour in gas) and provide the supplier with remote access to that data." ;
+                <http://www.w3.org/2004/02/skos/core#editorialNote> """Advanced meters have a lower minimum level of functionality than Smart_Meters.
+
+In GB regulations place an obligation on Suppliers to deploy Advanced_Meters to larger non-domestic consumers.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Advanced_Metering_Equipment_Type
+:Advanced_Metering_Equipment_Type rdf:type owl:Class ;
+                                  rdfs:subClassOf :Metering_Equipment_Technology_Type ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A category of Advanced_Metering_Equipment relating to its physical, metrology and technology capabilities." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Ancillary
+:Ancillary rdf:type owl:Class ;
+           rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Equipment> ;
+           rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Secondary equipment whose function is only to assist the fitment or safe and reliable operation of primary equipment." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Ancillary_Equipment_Type
+:Ancillary_Equipment_Type rdf:type owl:Class ;
+                          rdfs:subClassOf <https://ontologies.semanticarts.com/gist/EquipmentType> ;
+                          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "Designed to provide necessary support to the primary objective for which equipment is being deployed." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Ancillary_Metering_Equipment
+:Ancillary_Metering_Equipment rdf:type owl:Class ;
+                              rdfs:subClassOf :Ancillary ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                                                owl:someValuesFrom :Ancillary_Equipment_Type
+                                              ] ;
+                              rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "Equipment whose function is only to assist the fitment or safe and reliable operation of Retail_Energy_Meter(s)." ;
+                              <http://www.w3.org/2004/02/skos/core#example> "Electricity cables, meter tails, seals." ,
+                                                                            "Gas regulators, pipework, boxes, brackets and adapters." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Code_Management
+:Code_Management rdf:type owl:Class ;
+                 rdfs:subClassOf :Retail_Market_Management_Service ;
+                 rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "A service obligation relating to managing a Retail_Energy_Market code." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Code_Manager
+:Code_Manager rdf:type owl:Class ;
+              rdfs:subClassOf :Market_Participant ;
+              rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+              <http://www.w3.org/2004/02/skos/core#definition> "An organisation that plans and manages the delivery of a code, ensuring that the objectives of the code are met." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Compliance
+:Compliance rdf:type owl:Class ;
+            rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Behavior> ;
+            rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+            <http://www.w3.org/2004/02/skos/core#definition> "The action or fact of obeying a command or rule." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Compliance_Event
+:Compliance_Event rdf:type owl:Class ;
+                  rdfs:subClassOf <https://ontologies.semanticarts.com/gist/HistoricalEvent> ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty <https://ontologies.semanticarts.com/gist/characterizedAs> ;
+                                    owl:someValuesFrom :Compliance
+                                  ] ;
+                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Something related to compliance that has happened." ;
+                  <http://www.w3.org/2004/02/skos/core#editorialNote> "Compliance events are only \"real\" in the sense that management of compliance is achievable only when informed of actions taken that are relevent to the fulfilment of obligations." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Connection_Point
+:Connection_Point rdf:type owl:Class ;
+                  rdfs:subClassOf :Retail_Energy_Component ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty <https://ontologies.semanticarts.com/gist/contributesTo> ;
+                                    owl:someValuesFrom :GB_Energy_Distribution_System
+                                  ] ;
+                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "A physical access point on a GB_Energy_Distribution_System for connection to a source of energy demand and/or generation." ;
+                  <http://www.w3.org/2004/02/skos/core#editorialNote> """Connection_Points first and foremost contribute to the function of the Distribution System by providing a means of access to the network. They only become a direct part of a Retail_Energy_Metering_System when a Meter installation takes place, which connects the distribution network to the customer's energy distribution installation (gas pipework or electric circuits).
+
+They are manifested physically as a service head (pipe or cable) that is located in close proximity to a customer's Metering_Point. There is also as a corresponding contribution to the reinforcement of network capacity to enable energy flows to take place across the network between each of the dispersed sources of demand and sources of generation.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Customer
+:Customer rdf:type owl:Class ;
+          rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Organization> ;
+          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A person or organisation that purchases goods or services from a retailer." ;
+          <http://www.w3.org/2004/02/skos/core#editorialNote> """There is some uncertainty as to use of the words Customer and Consumer, in that the bill payer may well be other than the person who actually consumes the energy.
+
+For the sake of simplicity the Customer has been represented as an organisation, but it is important to recognise that Consumer protection applies if the entity is a person rather than a business.
+
+It is also possible for submetering to take place, for instance in buildings of multiple occupation. This is subject to regulatory constraints.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Data_Communications_Company
+:Data_Communications_Company rdf:type owl:Class ;
+                             rdfs:subClassOf :Market_Participant ;
+                             rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                             <http://www.w3.org/2004/02/skos/core#definition> "The Data_Communications_Company operates under the Smart Meter Communication Licence which was granted by the Department of Business, Energy and Industrial Strategy (BEIS) and is regulated by Ofgem." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Distribution_Connection_Agreement
+:Distribution_Connection_Agreement rdf:type owl:Class ;
+                                   rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Contract> ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                     owl:someValuesFrom :Mains_Energy_Service
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <https://ontologies.semanticarts.com/gist/hasGiver> ;
+                                                     owl:someValuesFrom :Market_Participant
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <https://ontologies.semanticarts.com/gist/hasParty> ;
+                                                     owl:someValuesFrom :Customer
+                                                   ] ;
+                                   rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                   <http://www.w3.org/2004/02/skos/core#definition> "An agreement between a building owner, which may possibly be a developer when the building is under construction, and a Market_Participant, to provide a Mains_Energy_Service" ;
+                                   <http://www.w3.org/2004/02/skos/core#editorialNote> "In GB both the Supplier, that typically owns the relationship with the Customer, and the applicable Electricity_Distributor or Gas_Transporter, are involved in forming the agreement." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Distribution_Licence
+:Distribution_Licence rdf:type owl:Class ;
+                      rdfs:subClassOf <https://www.lidcast.co.uk/ontologies/RE#Energy_Distribution/Transporter_Licence> ;
+                      rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "This allows the licensee to distribute electricity for the purpose of enabling a supply to be given. Electricity is distributed from the national electricity transmission system  through a low voltage network of wires to customers." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Distribution_System_Network
+:Distribution_System_Network rdf:type owl:Class ;
+                             rdfs:subClassOf :GB_Energy_Distribution_System ;
+                             rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                             <http://www.w3.org/2004/02/skos/core#definition> "A System which consists (wholly or mainly) of low voltage lines and electrical plant and is used for conveying electricity to a Building or to any other distribution system." ;
+                             <http://www.w3.org/2004/02/skos/core#editorialNote> "Distribution_System_Networks connect into the GB_Energy _Transmission_System and distribute electricity within a defined geographical region, each region corresponding to an \"Electricity Board\" that existed prior to industry deregulation." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Electricity_Distributor
+:Electricity_Distributor rdf:type owl:Class ;
+                         rdfs:subClassOf :Market_Participant ;
+                         rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "A company licensed to distribute electricity in Great Britain by the Office of Gas and Electricity Markets." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Electricity_Transmission_Network
+:Electricity_Transmission_Network rdf:type owl:Class ;
+                                  rdfs:subClassOf :GB_Energy_Transmission_System ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A system designed to convey electricity between sources of supply and demand geographically widely-dispersed across Great Britain and to Distribution_System_Networks." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Balancing_Responsibility
+:Energy_Balancing_Responsibility rdf:type owl:Class ;
+                                 rdfs:subClassOf :Mains_Energy_Service ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <https://ontologies.semanticarts.com/gist/governedBy> ;
+                                                   owl:someValuesFrom :Retail_Energy_Market_Framework_Agreement
+                                                 ] ;
+                                 rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "An obligation to continuously achieve equilibrium between energy provision and energy consumption." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Balancing_Service_Fulfilment
+:Energy_Balancing_Service_Fulfilment rdf:type owl:Class ;
+                                     rdfs:subClassOf :Retail_Energy_Service_Fulfilment ;
+                                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                     <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of a balanced energy outcome." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Delivery_Responsibility
+:Energy_Delivery_Responsibility rdf:type owl:Class ;
+                                rdfs:subClassOf :Mains_Energy_Service ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://ontologies.semanticarts.com/gist/governedBy> ;
+                                                  owl:someValuesFrom :Mains_Energy_Specification
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://ontologies.semanticarts.com/gist/governedBy> ;
+                                                  owl:someValuesFrom <https://www.lidcast.co.uk/ontologies/RE#Energy_Distribution/Transporter_Licence>
+                                                ] ;
+                                rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "An obligation to deliver an energy service to a geographical location by means of a GB_Energy_Distribution_System." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Delivery_Service_Fulfilment
+:Energy_Delivery_Service_Fulfilment rdf:type owl:Class ;
+                                    rdfs:subClassOf :Retail_Energy_Service_Fulfilment ;
+                                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                    <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of a specified energy delivery requirement." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Settlement
+:Energy_Settlement rdf:type owl:Class ;
+                   rdfs:subClassOf :Retail_Market_Management_Service ;
+                   rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A service obligation relating to managing the settlement of the Retail_Energy_Market as a whole." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Settlement_Responsibility
+:Energy_Settlement_Responsibility rdf:type owl:Class ;
+                                  rdfs:subClassOf :Mains_Energy_Service ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <https://ontologies.semanticarts.com/gist/governedBy> ;
+                                                    owl:someValuesFrom :Retail_Energy_Market_Framework_Agreement
+                                                  ] ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "An obligation to financially reconcile outturn consumption with energy purchased in advance and costs of incurred expenses of industry services." ;
+                                  <http://www.w3.org/2004/02/skos/core#editorialNote> """Currently gas in GB is settled daily and electricity is settled every half hour.
+
+Incurred expenses of industry services may be as a result of balancing, distribution and Retail Market management services.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Settlement_Service_Fulfilment
+:Energy_Settlement_Service_Fulfilment rdf:type owl:Class ;
+                                      rdfs:subClassOf :Retail_Energy_Service_Fulfilment ;
+                                      rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                      <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of energy settlement." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Supplier
+:Energy_Supplier rdf:type owl:Class ;
+                 rdfs:subClassOf :Market_Participant ;
+                 rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "A company licensed to supply gas or electricity in Great Britain by the Office of Gas and Electricity Markets." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Supply_Agreement
+:Energy_Supply_Agreement rdf:type owl:Class ;
+                         rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Contract> ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                           owl:someValuesFrom :Mains_Energy_Service
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty <https://ontologies.semanticarts.com/gist/hasGiver> ;
+                                           owl:someValuesFrom :Energy_Supplier
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty <https://ontologies.semanticarts.com/gist/hasParty> ;
+                                           owl:someValuesFrom :Customer
+                                         ] ;
+                         rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "An agreement given by an Energy_Supplier, to which a Customer is party, to supply a Mains_Energy_Service." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#GB_Energy_Distribution_System
+:GB_Energy_Distribution_System rdf:type owl:Class ;
+                               rdfs:subClassOf <https://ontologies.semanticarts.com/gist/System> ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                                 owl:someValuesFrom :Energy_Delivery_Service_Fulfilment
+                                               ] ;
+                               rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "A system designed to transport gas or conduct electricity between sources of supply and demand geographically dispersed across a local region of Great Britain." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#GB_Energy_Transmission_System
+:GB_Energy_Transmission_System rdf:type owl:Class ;
+                               rdfs:subClassOf <https://ontologies.semanticarts.com/gist/System> ;
+                               rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "A system designed to transport gas or convey electricity between sources of supply and demand geographically widely-dispersed across Great Britain and to GB_Energy_Distribution_Systems." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Gas_Distribution_Network
+:Gas_Distribution_Network rdf:type owl:Class ;
+                          rdfs:subClassOf :GB_Energy_Distribution_System ;
+                          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "A System which consists (wholly or mainly) of pipelines  and is used for transporting gas to a Building from the National (Gas) Transmission System." ;
+                          <http://www.w3.org/2004/02/skos/core#editorialNote> "Networks to transport gas for historical reasons extend across defined geographical regions of Great Britain." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Gas_Transmission_Network
+:Gas_Transmission_Network rdf:type owl:Class ;
+                          rdfs:subClassOf :GB_Energy_Transmission_System ;
+                          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "A system designed to transport gas between sources of supply and demand geographically widely-dispersed across Great Britain and to Gas_Distribution_Networks." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Gas_Transporter
+:Gas_Transporter rdf:type owl:Class ;
+                 rdfs:subClassOf :Market_Participant ;
+                 rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "A company licensed to transport gas in Great Britain by the Office of Gas and Electricity Markets." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Independent_Distribution_Network
+:Independent_Distribution_Network rdf:type owl:Class ;
+                                  rdfs:subClassOf :GB_Energy_Distribution_System ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A System which is used for conveying electricity to a Building from a Distribution_System_Network." ;
+                                  <http://www.w3.org/2004/02/skos/core#editorialNote> "These are mainly used for new housing developments and in effect extend a Distribution_System." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Independent_Gas_Transporter_Network
+:Independent_Gas_Transporter_Network rdf:type owl:Class ;
+                                     rdfs:subClassOf :GB_Energy_Distribution_System ;
+                                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                     <http://www.w3.org/2004/02/skos/core#definition> "A System which is used for transporting gas to a Building from a Gas_Distribution_Network." ;
+                                     <http://www.w3.org/2004/02/skos/core#editorialNote> "These are mainly used for new housing developments and in effect extend a Distribution_System." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Licence
+:Licence rdf:type owl:Class ;
+         rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Permission> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <https://ontologies.semanticarts.com/gist/hasJurisdiction> ;
+                           owl:someValuesFrom <https://ontologies.semanticarts.com/gist/GovernmentOrganization>
+                         ] ;
+         rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+         <http://www.w3.org/2004/02/skos/core#definition> "A Permssion which can be enforced by law" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Licence_Condition
+:Licence_Condition rdf:type owl:Class ;
+                   rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Specification> ;
+                   rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A specification of some aspect of a licence." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Mains_Energy_Service
+:Mains_Energy_Service rdf:type owl:Class ;
+                      rdfs:subClassOf :Service_Obligation ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://ontologies.semanticarts.com/gist/actual> ;
+                                        owl:someValuesFrom :Retail_Energy_Service_Compliance_Event
+                                      ] ;
+                      rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "An obligation to provide an energy service that is delivered at a location wholly or partly by means of a GB_Energy_Distribution_System." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Mains_Energy_Specification
+:Mains_Energy_Specification rdf:type owl:Class ;
+                            rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Specification> ;
+                            <http://www.w3.org/2004/02/skos/core#editorialNote> """\"Types of gas and corresponding supply pressures in the UK\" is published by Office for Product Safety and Standards as of July 2021
+
+
+Characteristics of UK low-voltage mains electricity are the subject of formal standards, including the following as of July 2021: 
+
+- BS EN 50160:2010 Voltage characteristics of electricity supplied by public electricity networks
+
+- BS 7671 Although low-voltage characteristics are specified therein this is not a legally binding document and the scope primarily concerns wiring regulations.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Market_Participant
+:Market_Participant rdf:type owl:Class ;
+                    rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Organization> ;
+                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "A person or organisation that participates in a Retail_Energy_Market_Agreement." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Market_Participant_Data_Transfer
+:Market_Participant_Data_Transfer rdf:type owl:Class ;
+                                  rdfs:subClassOf :Retail_Market_Management_Service ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A service obligation relating to managing the movement of data between participants, for the Retail_Energy_Market as a whole." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Market_Participation_Period
+:Market_Participation_Period rdf:type owl:Class ;
+                             rdfs:subClassOf <https://ontologies.semanticarts.com/gist/TemporalRelation> ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                               owl:someValuesFrom :Market_Participant
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                               owl:someValuesFrom :Retail_Energy_Market_Framework_Agreement
+                                             ] ;
+                             rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                             <http://www.w3.org/2004/02/skos/core#definition> "The period through which a Market_Participant participates in a Retail_Energy_Market_Framework_Agreement." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Measuring_Instrument
+:Measuring_Instrument rdf:type owl:Class ;
+                      rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Equipment> ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                                        owl:someValuesFrom <https://ontologies.semanticarts.com/gist/EquipmentType>
+                                      ] ;
+                      rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "A device to measure a physical quantity." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Meter_Operative_Period
+:Meter_Operative_Period rdf:type owl:Class ;
+                        rdfs:subClassOf <https://ontologies.semanticarts.com/gist/TemporalRelation> ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                          owl:someValuesFrom :Retail_Energy_Meter
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                          owl:someValuesFrom :Retail_Energy_Meter_Installation
+                                        ] ;
+                        rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "A time period over which a Retail_Energy_Meter forms part of a Retail_Energy_Meter_Installation." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Metering_Equipment_Technology_Type
+:Metering_Equipment_Technology_Type rdf:type owl:Class ;
+                                    rdfs:subClassOf <https://ontologies.semanticarts.com/gist/EquipmentType> ;
+                                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                    <http://www.w3.org/2004/02/skos/core#definition> "A category of equipment relating to its metrology and technology capabilities." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Metering_Point
+:Metering_Point rdf:type owl:Class ;
+                rdfs:subClassOf :Retail_Energy_Component ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty <https://ontologies.semanticarts.com/gist/partOf> ;
+                                  owl:someValuesFrom <https://ontologies.semanticarts.com/gist/Building>
+                                ] ;
+                rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                <http://www.w3.org/2004/02/skos/core#definition> "A constructural provision made within a building for the installation and maintenance of energy measurement equipment, typically located at the premises being served with energy or as near to it as is practical." ;
+                <http://www.w3.org/2004/02/skos/core#editorialNote> """Metering_Points first and foremost are part of a Building (Building in the widest sense of any man made structure, large or small) in that they are constructed to provide a safe and secure space in which to house a Retail_Energy_Metering_System. 
+
+Can become a direct part of a Retail_Energy_Metering_System when a Meter installation takes place, which securely fits a Retail_Energy_Meter in place together with any necessary Ancillary_Metering_Equipment, enabling it to operate safely and autonomously within the environment.
+
+A Building_Address of a Building of which a Metering_Point is a part, is known as a \"Retail Energy Location\" under the Ofgem Switching Program (2021). 
+
+Generally constrained by industry governance to be coincident with a Connection_Point, both in terms of proximity to, and connection to, service head gas pipework / electrical circuitry. However, this may not always be the case as a result of engineering or commercial practicalities.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Metering_System_Registration_Period
+:Metering_System_Registration_Period rdf:type owl:Class ;
+                                     rdfs:subClassOf <https://ontologies.semanticarts.com/gist/TemporalRelation> ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                                       owl:someValuesFrom :Retail_Energy_Metering_System
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty <https://ontologies.semanticarts.com/gist/connectedTo> ;
+                                                       owl:someValuesFrom :Retail_Energy_Metering_System_Registration
+                                                     ] ;
+                                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                     <http://www.w3.org/2004/02/skos/core#definition> "Responsibility for the consumption of energy services by a contracted (or under a deemed contract) customer for a duration of time." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Metering_System_Responsibility
+:Metering_System_Responsibility rdf:type owl:Class ;
+                                rdfs:subClassOf :Mains_Energy_Service ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://ontologies.semanticarts.com/gist/governedBy> ;
+                                                  owl:someValuesFrom :Retail_Energy_Market_Framework_Agreement
+                                                ] ;
+                                rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "An obligation to install, commission and manage the metering equipment at a Retail_Energy_Meter_Installation, and thereby measure the consumption of energy services." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Metering_System_Service_Fulfilment
+:Metering_System_Service_Fulfilment rdf:type owl:Class ;
+                                    rdfs:subClassOf :Retail_Energy_Service_Fulfilment ;
+                                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                    <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of Metering_System installation, maintenance and operation." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Component
+:Retail_Energy_Component rdf:type owl:Class ;
+                         rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Component> ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty <https://ontologies.semanticarts.com/gist/contributesTo> ;
+                                           owl:someValuesFrom :Retail_Energy_Market
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                           owl:someValuesFrom :Retail_Energy_Service_Fulfilment
+                                         ] ;
+                         rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                         <http://www.w3.org/2004/02/skos/core#definition> "An constituent part of a Retail_Energy_Metering_System." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Location
+:Retail_Energy_Location rdf:type owl:Class ;
+                        rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Building> ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                          owl:someValuesFrom :Retail_Energy_Service_Fulfilment
+                                        ] ;
+                        rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "A building for which there is agreement to connect to mains services with the relevant authorities." ;
+                        <http://www.w3.org/2004/02/skos/core#example> "Does not include \"off-grid\" buildings." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Market
+:Retail_Energy_Market rdf:type owl:Class ;
+                      rdfs:subClassOf <https://ontologies.semanticarts.com/gist/System> ;
+                      rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                      <http://www.w3.org/2004/02/skos/core#definition> "The Retail_Energy_Market is where Energy_Suppliers compete to sell gas and electricity to end users: procuring consumers’ energy, setting the prices they pay and managing customer service." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Market_Agreement
+:Retail_Energy_Market_Agreement rdf:type owl:Class ;
+                                rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Contract> ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://ontologies.semanticarts.com/gist/hasGiver> ;
+                                                  owl:someValuesFrom :Code_Manager
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty <https://ontologies.semanticarts.com/gist/hasParty> ;
+                                                  owl:someValuesFrom :Market_Participant
+                                                ] ;
+                                rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "An agreement given by a Code_Manager relating to participation in the Retail_Energy_Market." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Market_Framework_Agreement
+:Retail_Energy_Market_Framework_Agreement rdf:type owl:Class ;
+                                          rdfs:subClassOf :Retail_Energy_Market_Agreement ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://ontologies.semanticarts.com/gist/hasParty> ;
+                                                            owl:someValuesFrom :Market_Participant
+                                                          ] ;
+                                          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "An agreement given by a Code_Manager, to which a Market_Participant is party in order to trade in the Retail_Energy_Market." ;
+                                          <http://www.w3.org/2004/02/skos/core#editorialNote> """In GB, partly for historical reasons, there are a number of Codes that Market_Participants must be party to before they can trade, including:
+
+Retail Energy Code
+Smart Energy Code
+Balancing and Settlement Code.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Meter
+:Retail_Energy_Meter rdf:type owl:Class ;
+                     rdfs:subClassOf :Measuring_Instrument ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                                       owl:someValuesFrom :Metering_Equipment_Technology_Type
+                                     ] ;
+                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                     <http://www.w3.org/2004/02/skos/core#definition> "A device to measure a quantity of Electricity or Gas." ;
+                     <http://www.w3.org/2004/02/skos/core#editorialNote> """Meters are typically designed to be self-contained within a secure enclosure such that they can be safely installed at a Customer's premises. 
+
+Energy meters typically record metered data in addition to measurement. 
+
+A number of regulations, such as the EU Measuring Instruments Directive, govern the design and operation of meters.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Meter_Installation
+:Retail_Energy_Meter_Installation rdf:type owl:Class ;
+                                  rdfs:subClassOf :Retail_Energy_Component ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A Retail_Energy_Component that fulfills the operational requirements for metering at a Metering_Point." ;
+                                  <http://www.w3.org/2004/02/skos/core#editorialNote> """A Retail_Energy_Meter_Installation becomes a direct part of a Retail_Energy_Metering_System when a Meter installation takes place, which connects the customer internal energy distribution (gas pipework or electric ciruits) and which securely fits a Retail_Energy_Meter in place together with any necessary Ancillary_Metering_Equipment.
+
+All reasonable steps are being taken to have a smart meter installed for all Domestic_Sized_Metering_Systems in Great Britain (as July 2021).
+Nonetheless there are circumstances where other Metering_Equipment_Technology_Types will remain in place for some time.
+
+All reasonable steps are being taken to have an advanced meter installed for all Non_Domestic_Sized_Metering_Systems in Great Britain (as July 2021).
+Nonetheless there are circumstances where other Metering_Equipment_Technology_Types will remain in place for some time.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Metering_System
+:Retail_Energy_Metering_System rdf:type owl:Class ;
+                               rdfs:subClassOf <https://ontologies.semanticarts.com/gist/System> ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                 owl:someValuesFrom :Connection_Point
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                 owl:someValuesFrom :Metering_Point
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                 owl:someValuesFrom :Retail_Energy_Meter_Installation
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                                 owl:someValuesFrom :Energy_Balancing_Service_Fulfilment
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                                 owl:someValuesFrom :Energy_Settlement_Service_Fulfilment
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty <https://ontologies.semanticarts.com/gist/hasGoal> ;
+                                                 owl:someValuesFrom :Metering_System_Service_Fulfilment
+                                               ] ;
+                               rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "An installed system of integrated components that enables the exchange of energy to take place and to be measured." ;
+                               <http://www.w3.org/2004/02/skos/core#editorialNote> "This is perhaps the most important class in the energy industry and where confusion most often lies. It ties together the cables or pipework of energy delivery with the customer's metering-accommodation, typically the cupboard under the stairs in residential buildings, and the meter installation, which includes all the necessary connections and ancillary equipment to enable energy to flow into or out of the building. To be clear, it fails to exist unless all three of these components  exist." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Metering_System_Registration
+:Retail_Energy_Metering_System_Registration rdf:type owl:Class ;
+                                            rdfs:subClassOf :Retail_Energy_Market_Agreement ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                              owl:someValuesFrom :Energy_Settlement_Responsibility
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://ontologies.semanticarts.com/gist/hasDirectPart> ;
+                                                              owl:someValuesFrom :Metering_System_Responsibility
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://ontologies.semanticarts.com/gist/hasGiver> ;
+                                                              owl:someValuesFrom :Code_Manager
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <https://ontologies.semanticarts.com/gist/hasParty> ;
+                                                              owl:someValuesFrom :Energy_Supplier
+                                                            ] ;
+                                            rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "Responsibility for the consumption of energy services by a contracted (or under a deemed contract) customer for a duration of time." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Service_Compliance
+:Retail_Energy_Service_Compliance rdf:type owl:Class ;
+                                  rdfs:subClassOf :Compliance ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#editorialNote> """Compliance in respect of retail energy services is subject to detailed market management regulations specified under industry governance, given force through binding legal agreements and Ofgem's statutary powers. It is only \"real\" in the sense that a degree of compliance is essential to fulfil the service obligations that are placed upon the energy companies. 
+Refer to Ofgem and industry codes for specific implementation detail.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Service_Compliance_Event
+:Retail_Energy_Service_Compliance_Event rdf:type owl:Class ;
+                                        rdfs:subClassOf :Compliance_Event ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://ontologies.semanticarts.com/gist/characterizedAs> ;
+                                                          owl:someValuesFrom :Retail_Energy_Service_Compliance
+                                                        ] ;
+                                        rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                        <http://www.w3.org/2004/02/skos/core#definition> "Something related to fulfilment of service obligation compliance in the Reatil_Energy_Market, that has happened." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Energy_Service_Fulfilment
+:Retail_Energy_Service_Fulfilment rdf:type owl:Class ;
+                                  rdfs:subClassOf :Service_Fulfilment ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <https://ontologies.semanticarts.com/gist/allows> ;
+                                                    owl:someValuesFrom :Retail_Energy_Service_Compliance_Event
+                                                  ] ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of a specified retail energy requirement, output or outcome." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Retail_Market_Management_Service
+:Retail_Market_Management_Service rdf:type owl:Class ;
+                                  rdfs:subClassOf :Service_Obligation ;
+                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                  <http://www.w3.org/2004/02/skos/core#definition> "A service obligation relating to managing the operation of the Retail_Energy_Market as a whole." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Service_Fulfilment
+:Service_Fulfilment rdf:type owl:Class ;
+                    rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Function> ;
+                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The planned achievement of a specified requirement, output or outcome." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Service_Obligation
+:Service_Obligation rdf:type owl:Class ;
+                    rdfs:subClassOf <https://ontologies.semanticarts.com/gist/Obligation> ;
+                    rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "An Obligation to provide a piece of work completed for a client or customer that does not involve manufacturing goods." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Smart_Data_Communication
+:Smart_Data_Communication rdf:type owl:Class ;
+                          rdfs:subClassOf :Retail_Market_Management_Service ;
+                          rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                          <http://www.w3.org/2004/02/skos/core#definition> "A service obligation relating to managing the operation of the communication with Smart_Meters for the Retail_Energy_Market as a whole." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Smart_Meter
+:Smart_Meter rdf:type owl:Class ;
+             rdfs:subClassOf :Retail_Energy_Meter ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                               owl:someValuesFrom :Smart_Metering_Equipment_Type
+                             ] ;
+             rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Smart meters are devices which provide measured gas or electricity flows for multiple time periods (eg for each half hour in electricity or hour in gas), provide remote access to that data, provide additional computerised and electromechanical features and provide remote access to configure those features." ;
+             <http://www.w3.org/2004/02/skos/core#editorialNote> """In GB Smart_Meters have a minimum level of functionality specified by SMETS - Smart Metering Technical Specifications.
+
+In GB regulations place an obligation on Suppliers to deploy Smart_Meters to domestic and smaller non-domestic consumers.
+
+In GB Smart_Meters communicate wirelessly within each building with a Communications Hub that is typically attached via a mechanical and electrical interface to an electricity Smart_Meter. Each Communications Hub also communicates wirelessly with a wide area network operated by the Data Communications Company, a monopoly provider operating under licence, which provides interoperable remote communication services to Suppliers.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Smart_Metering_Equipment_Type
+:Smart_Metering_Equipment_Type rdf:type owl:Class ;
+                               rdfs:subClassOf :Metering_Equipment_Technology_Type ;
+                               rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                               <http://www.w3.org/2004/02/skos/core#definition> "A category of Smart_Metering_Equipment relating to its physical, metrology and technology capabilities." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Traditional_Meter
+:Traditional_Meter rdf:type owl:Class ;
+                   rdfs:subClassOf :Retail_Energy_Meter ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty <https://ontologies.semanticarts.com/gist/categorizedBy> ;
+                                     owl:someValuesFrom :Traditional_Metering_Equipment_Type
+                                   ] ;
+                   rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "A Measuring_Instrument that qualifies for deployment in the Retail_Energy_Market but that lacks the requisite data processing and remote communication facilities of an Advanced_Meter or Smart_Meter." ;
+                   <http://www.w3.org/2004/02/skos/core#editorialNote> """Traditional_Meters in GB are typically electro-mechanical for electricity and mechanical for gas.
+
+Although in GB an obligation is placed upon Suppliers to replace Traditional_Meters with Smart_Meters and Advanced_Meters, a significant number will remain because of financial, engineering or operational reasons.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Traditional_Metering_Equipment_Type
+:Traditional_Metering_Equipment_Type rdf:type owl:Class ;
+                                     rdfs:subClassOf :Metering_Equipment_Technology_Type ;
+                                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                     <http://www.w3.org/2004/02/skos/core#definition> "A category of Traditional_Metering_Equipment relating to its physical, metrology and technology capabilities." .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Transmission_System_Operator
+:Transmission_System_Operator rdf:type owl:Class ;
+                              rdfs:subClassOf :Market_Participant ;
+                              rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                              <http://www.w3.org/2004/02/skos/core#definition> "Transmission System Operator is a natural or legal person responsible for operating, ensuring the maintenance of and, if necessary, developing the transmission system in a given area and, where applicable, its interconnections with other systems, and for ensuring the long-term ability of the system to meet reasonable demands for the transmission of electricity (Directive (EU) 2019/944)" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Transporter_Licence
+:Transporter_Licence rdf:type owl:Class ;
+                     rdfs:subClassOf <https://www.lidcast.co.uk/ontologies/RE#Energy_Distribution/Transporter_Licence> ;
+                     rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                     <http://www.w3.org/2004/02/skos/core#definition> """This allows the licensee to:
+
+convey gas through pipes to any premises within an area authorised by the licence
+
+convey gas through pipes to any pipeline system operated by another Gas Transporter, or other pipeline system specified in the licence.""" .
+
+
+###  https://www.lidcast.co.uk/ontologies/RE#Energy_Distribution/Transporter_Licence
+<https://www.lidcast.co.uk/ontologies/RE#Energy_Distribution/Transporter_Licence> rdf:type owl:Class ;
+                                                                                  rdfs:subClassOf :Licence ;
+                                                                                  rdfs:isDefinedBy "https://www.lidcast.co.uk/ontologies/RE" ;
+                                                                                  <http://www.w3.org/2004/02/skos/core#editorialNote> "A generic licence encompassing Gas and Electricity is only \"real\" in the sense that the administration of some customer-facing activities has become harmonised under the Retail Energy Market." .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Energy_Balancing_Service_Fulfilment
+                :Energy_Delivery_Service_Fulfilment
+                :Energy_Settlement_Service_Fulfilment
+                :Metering_System_Service_Fulfilment
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.7.2018-12-02T02:23:35Z) https://github.com/owlcs/owlapi
